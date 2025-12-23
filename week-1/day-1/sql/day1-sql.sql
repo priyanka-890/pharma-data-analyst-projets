@@ -1,0 +1,75 @@
+CREATE TABLE PHARMA_SALES (
+	DATUM DATE,
+	M01AB NUMERIC,
+	M01AE NUMERIC,
+	N02BA NUMERIC,
+	N02BE NUMERIC,
+	N05B NUMERIC,
+	N05C NUMERIC,
+	R03 NUMERIC,
+	R06 NUMERIC,
+	YEAR INTEGER,
+	MONTH INTEGER,
+	HOUR INTEGER,
+	WEEKDAY_NAME VARCHAR(20)
+)
+-- load csv
+SET
+	DATESTYLE = 'MDY';
+
+COPY PHARMA_SALES
+FROM
+	'C:/data/pharma_sales.csv' DELIMITER ',' CSV HEADER;
+
+SELECT
+	*
+FROM
+	PHARMA_SALES;
+
+SELECT
+	DATUM,
+	M01AB,
+	M01AE
+FROM
+	PHARMA_SALES;
+
+SELECT
+	DATUM,
+	(
+		M01AB + M01AE + N02BA + N02BE + N05B + N05C + R03 + R06
+	) AS TOATAL_SALES
+FROM
+	PHARMA_SALES;
+
+
+select * from 
+(SELECT
+	DATUM,
+	(
+		M01AB + M01AE + N02BA + N02BE + N05B + N05C + R03 + R06
+	) AS TOTAL_SALES
+FROM
+	PHARMA_SALES) t
+where total_sales > 50;
+
+-- permanently create total_sales
+ALTER TABLE PHARMA_SALES
+ADD COLUMN TOTAL_SALES NUMERIC;
+
+ALTER TABLE PHARMA_SALES
+ADD COLUMN TOTAL_SALES2 NUMERIC;
+
+update pharma_sales
+set total_sales= M01AB + M01AE + N02BA + N02BE + N05B + N05C + R03 + R06;
+
+-- if table had null values
+
+
+
+
+update pharma_sales
+	set total_sales2=coalesce(M01AB,0) + coalesce(M01AE,0) +coalesce(N02BA,0) + coalesce(N02BE,0) +coalesce(N05B,0) + coalesce(N05C,0) +coalesce(R03,0) +coalesce(R06,0);
+
+
+
+
