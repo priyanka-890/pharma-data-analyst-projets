@@ -63,6 +63,14 @@ limit 5;
 ![alt text](./public/image-9.png)
 
 
+# Bottom 5 Worst Sellers by Total Pizzas Sold
+
+select pizza_name_id,sum(quantity::numeric)as total_pizzas_sold from pizza_sales_staging
+group by pizza_name_id
+order by  sum(quantity::numeric)
+limit 5;
+![alt text](image-11.png)
+
 
 
 
