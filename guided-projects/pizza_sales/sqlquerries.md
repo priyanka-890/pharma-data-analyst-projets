@@ -33,6 +33,36 @@ ORDER BY
   ** You cannot use EXTRACT(DOW FROM order_date) only in ORDER BYbecause after GROUP BY, order_date no longer exists as a single value ** 
 
 
+# Hourly Trend for Total Orders
+SELECT EXTRACT(HOUR FROM order_time::time) AS hr,count(distinct order_id)
+FROM pizza_sales_staging
+group by EXTRACT(HOUR FROM order_time::time)
+
+** to get hrs from order_time
+![alt text](./public/image.png)
+
+# -- Percentage of Sales by Pizza Category
+select pizza_category,round(sum(quantity::numeric)*100/sum(sum(quantity::numeric)) over (),2)
+from pizza_sales_staging
+group by pizza_category;
+![alt text](image8.png)
+
+
+# Total Pizzas Sold by Pizza Category
+select pizza_category, round(sum(quantity::numeric)*100/sum(sum(quantity::numeric)) over (),2) as sales_percentage
+from pizza_sales_staging
+group by pizza_category;
+![alt text](./public/image-10.png)
+
+# Top 5 Best Sellers by Total Pizzas Sold
+select  pizza_name_id,sum(quantity::numeric) as total_pzzas_sold from pizza_sales_staging
+group by pizza_name_id
+order by sum(quantity::numeric) desc
+limit 5;
+
+![alt text](./public/image-9.png)
+
+
 
 
 
