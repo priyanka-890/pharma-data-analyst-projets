@@ -18,5 +18,16 @@
 # SELECT Round(sum(QUANTITY::numeric) / COUNT(DISTINCT ORDER_ID),2) AS AVG_PIZZA_PER_ORDER FROM PIZZA_SALES_STAGING;
 ![alt text](image-5.png)
 
+<!-- # SELECT
+  TO_CHAR(order_date::date, 'Day') AS day_name,
+  COUNT(DISTINCT order_id) AS total_orders
+FROM pizza_sales_staging
+GROUP BY
+  TO_CHAR(order_date::date, 'Day'),
+  EXTRACT(DOW FROM order_date::date)
+ORDER BY
+  EXTRACT(DOW FROM order_date::date); -->
+
+
 
 
