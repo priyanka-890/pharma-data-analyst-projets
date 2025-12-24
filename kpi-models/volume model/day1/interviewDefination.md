@@ -133,4 +133,4 @@ Deepen volume diagnostics first, validate hypotheses with appropriate data, and 
 # Final Interview Soundbite (Strong Close)
 
 “When performance declines, I always start with volume.
-I want to understand whether activity changed before interpreting financial impact.
+I want to understand whether activity changed before interpreting financial impact..
