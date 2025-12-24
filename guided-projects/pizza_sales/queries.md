@@ -11,8 +11,8 @@
 ![alt text](image-3.png)
 
 -- Total Orders
-# select sum(distinct order_id::numeric) as total_orders from pizza_sales_staging;
-![alt text](image-4.png)
+# SELECT count(DISTINCT ORDER_ID::NUMERIC) AS TOTAL_ORDERS FROM PIZZA_SALES_STAGING;
+![alt text](image-6.png)
 
 -- Average Pizzas per Order
 # SELECT Round(sum(QUANTITY::numeric) / COUNT(DISTINCT ORDER_ID),2) AS AVG_PIZZA_PER_ORDER FROM PIZZA_SALES_STAGING;
