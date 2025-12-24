@@ -31,7 +31,7 @@ ORDER BY
   ![alt text](image-7.png)
 
   ** You cannot use EXTRACT(DOW FROM order_date) only in ORDER BYbecause after GROUP BY, order_date no longer exists as a single value ** 
-
+![alt text](./public/image.png)
 
 # Hourly Trend for Total Orders
 SELECT EXTRACT(HOUR FROM order_time::time) AS hr,count(distinct order_id)
