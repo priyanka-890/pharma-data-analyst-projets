@@ -30,6 +30,8 @@ ORDER BY
   EXTRACT(DOW FROM order_date::date);
   ![alt text](image-7.png)
 
+
+
   ** You cannot use EXTRACT(DOW FROM order_date) only in ORDER BYbecause after GROUP BY, order_date no longer exists as a single value ** 
 ![alt text](./public/image-12.png)
 
@@ -45,7 +47,26 @@ group by EXTRACT(HOUR FROM order_time::time)
 select pizza_category,round(sum(quantity::numeric)*100/sum(sum(quantity::numeric)) over (),2)
 from pizza_sales_staging
 group by pizza_category;
-![alt text](image8.png)
+![alt text](./public/image8.png)
+
+**to apply filter**
+  # filter january month
+  select pizza_category, round(sum(quantity::numeric)*100/sum(sum(quantity::numeric)) over (),2) as sales_percentage
+from pizza_sales_staging
+where trim(to_char(order_date::date,'month'))='january'
+group by pizza_category;
+
+  # filter 1st month
+    select order_date,pizza_category, round(sum(quantity::numeric)*100/sum(sum(quantity::numeric)) over (),2) as sales_percentage
+from pizza_sales_staging
+where extract(month from order_date::date)=1
+group by pizza_category,order_date;  
+
+  # filter first quater  
+   select pizza_category, round(sum(quantity::numeric)*100/sum(sum(quantity::numeric)) over (),2) as sales_percentage
+from pizza_sales_staging
+where extract(quarter from order_date::date)=1
+group by pizza_category;          
 
 
 # Total Pizzas Sold by Pizza Category
